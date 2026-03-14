@@ -257,6 +257,30 @@
     font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
     color: rgba(0,0,0,.18); z-index: 100;
   }
+
+  /* ── Mobile Responsive ── */
+  @media (max-width: 768px) {
+    .slide {
+      padding: clamp(24px, 5vh, 48px) clamp(16px, 5vw, 32px);
+    }
+    .cards-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .hero-stat-row {
+      gap: 20px;
+    }
+    .hero-stat-num { font-size: 26px; }
+    .section-sub { margin-bottom: 28px; }
+    .wolf-content {
+      bottom: 52px;
+      padding: 0 20px;
+    }
+    .wolf-title { font-size: clamp(22px, 6vw, 40px); }
+    .nav-arrow.prev { left: 8px; }
+    .nav-arrow.next { right: 8px; }
+    .wbtm-brand { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -393,6 +417,21 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && current < slides.length - 1) goTo(current + 1);
   if (e.key === 'ArrowLeft'  && current > 0) goTo(current - 1);
 });
+
+// Touch swipe support
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].clientX;
+  touchStartY = e.changedTouches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0 && current < slides.length - 1) goTo(current + 1);
+    if (dx > 0 && current > 0) goTo(current - 1);
+  }
+}, { passive: true });
 </script>
 </body>
 </html>
