@@ -32,7 +32,7 @@
 
   body {
     font-family: var(--font);
-    background: var(--bg);
+    background: #fff;
     color: var(--text);
     height: 100vh;
     overflow: hidden;
@@ -58,7 +58,85 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Hero Slide ── */
+  /* ── Wolf Opening Slide ── */
+  .slide.wolf-opening {
+    background: #ffffff;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Static image on opening slide */
+  .wolf-bg {
+    position: absolute; inset: 0;
+    background-image: url('../assets/logo-orange-whitebackground.png');
+    background-repeat: no-repeat;
+    background-size: 110%;
+    background-position: center 35%;
+    opacity: .9;
+    z-index: 0;
+  }
+  /* White vignette at edges so text at bottom is readable */
+  .wolf-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(255,255,255,.55) 100%);
+  }
+  /* White fade at bottom for text area */
+  .wolf-overlay-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 45%; z-index: 1;
+    background: linear-gradient(to top, rgba(255,255,255,.95) 0%, transparent 100%);
+  }
+  .wolf-content {
+    position: absolute; bottom: 72px; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0 40px; z-index: 2;
+  }
+  .wolf-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #0a0a0a; border: 1px solid rgba(245,166,35,.5);
+    border-radius: 100px; padding: 7px 18px;
+    font-size: 12px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: #F5A623;
+    margin-bottom: 16px;
+  }
+  .wolf-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #F5A623; animation: pulse 2s ease-in-out infinite;
+  }
+  .wolf-title {
+    font-size: clamp(28px, 4vw, 52px); font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.1;
+    color: #0a0a0a; margin-bottom: 10px;
+  }
+  .wolf-sub {
+    font-size: 14px; color: rgba(0,0,0,.4);
+    letter-spacing: .04em; font-weight: 500;
+  }
+  .click-hint {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    font-size: 12px; color: rgba(0,0,0,.22); letter-spacing: .12em;
+    text-transform: uppercase; font-weight: 600; z-index: 2;
+    animation: blink 2.5s ease-in-out infinite;
+    white-space: nowrap;
+  }
+
+  /* ── Glow Orbs (wolf slide) ── */
+  .glow-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(120px); pointer-events: none; z-index: 0;
+    animation: float 12s ease-in-out infinite;
+  }
+  .glow-orb.a { width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,166,35,.18) 0%, transparent 70%); right: -150px; bottom: -100px; }
+  .glow-orb.b { width: 350px; height: 350px; background: radial-gradient(circle, rgba(232,137,12,.12) 0%, transparent 70%); left: -120px; top: -80px; animation-delay: -6s; }
+
+  /* ── Keyframes ── */
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.8); } }
+  @keyframes blink { 0%,100% { opacity: .3; } 50% { opacity: .9; } }
+
+  /* ── Light slides (1–3) ── */
+  .slide.light { background: #ffffff; color: #0a0a0a; }
+
+  /* ── Hero Slide (slide 1) ── */
   .badge {
     display: inline-block; font-size: 11px; letter-spacing: .18em;
     text-transform: uppercase; color: var(--accent-2);
@@ -114,10 +192,31 @@
     transition: border-color .3s;
     cursor: default;
   }
-  .service-card:hover { border-color: rgba(124,58,237,.4); }
+  .service-card:hover { border-color: rgba(245,166,35,.4); }
   .service-icon { font-size: 32px; margin-bottom: 16px; }
   .service-name { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
   .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── CTA Video Slide ── */
+  .slide.cta-video {
+    background: #000;
+    padding: clamp(40px, 8vh, 80px) clamp(24px, 8vw, 120px);
+    color: #ffffff;
+  }
+  .cta-video-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    z-index: 0; opacity: .55;
+  }
+  .cta-video-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: rgba(255,255,255,.55);
+  }
+  .cta-video .slide-content { position: relative; z-index: 2; }
+  .cta-video .cta-title { color: #0a0a0a; -webkit-text-fill-color: #0a0a0a; }
+  .cta-video .cta-sub { color: rgba(0,0,0,.5); }
+  .cta-video .cta-tagline { color: rgba(0,0,0,.3); }
 
   /* ── CTA Slide ── */
   .cta-title {
@@ -139,24 +238,24 @@
   /* ── Navigation ── */
   .nav-arrow {
     position: fixed; top: 50%; transform: translateY(-50%);
-    background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    background: rgba(0,0,0,.05); border: 1px solid rgba(0,0,0,.10); color: #0a0a0a;
     font-size: 18px; width: 44px; height: 44px; border-radius: 50%;
-    cursor: pointer; transition: border-color .2s; z-index: 100;
+    cursor: pointer; transition: border-color .2s, background .2s; z-index: 100;
   }
-  .nav-arrow:hover { border-color: var(--accent); }
+  .nav-arrow:hover { border-color: var(--accent); background: rgba(245,166,35,.10); }
   .nav-arrow.prev { left: 20px; }
   .nav-arrow.next { right: 20px; }
   .nav-arrow.hidden { opacity: 0; pointer-events: none; }
 
-  .nav-dots { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
-  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .2s; }
+  .nav-dots { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,.18); cursor: pointer; transition: background .2s; }
   .nav-dot.active { background: var(--accent); }
 
   /* ── Branding watermark ── */
   .wbtm-brand {
     position: fixed; bottom: 22px; right: 28px;
     font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
-    color: rgba(255,255,255,.2);
+    color: rgba(0,0,0,.18); z-index: 100;
   }
 </style>
 </head>
@@ -164,8 +263,23 @@
 
 <div class="slides-container">
 
+  <!-- Slide 0: Wolf Opening -->
+  <div class="slide wolf-opening active" id="slide-0">
+    <div class="glow-orb a"></div>
+    <div class="glow-orb b"></div>
+    <div class="wolf-bg"></div>
+    <div class="wolf-overlay"></div>
+    <div class="wolf-overlay-bottom"></div>
+    <div class="wolf-content">
+      <div class="wolf-badge">We Buildt To Multiply</div>
+      <div class="wolf-title">Built to multiply.</div>
+      <div class="wolf-sub">Automation · AI Agents · HubSpot CRM</div>
+    </div>
+    <div class="click-hint">Press → to continue</div>
+  </div>
+
   <!-- Slide 1: Hero -->
-  <div class="slide active" id="slide-0">
+  <div class="slide light" id="slide-1">
     <div class="slide-content">
       <div class="badge">We Buildt To Multiply · WBTM</div>
       <h1 class="hero-title">We don't just build tools.<br><span>We multiply results.</span></h1>
@@ -188,7 +302,7 @@
   </div>
 
   <!-- Slide 2: Services -->
-  <div class="slide" id="slide-1">
+  <div class="slide light" id="slide-2">
     <div class="slide-content">
       <div class="section-label">What We Do</div>
       <h2 class="section-title">Three ways we multiply your business</h2>
@@ -219,8 +333,12 @@
     </div>
   </div>
 
-  <!-- Slide 3: CTA -->
-  <div class="slide" id="slide-2">
+  <!-- Slide 3: CTA with video background -->
+  <div class="slide cta-video" id="slide-3">
+    <video class="cta-video-bg" autoplay muted loop playsinline>
+      <source src="../assets/WBTM wolf-moving.mp4" type="video/mp4">
+    </video>
+    <div class="cta-video-overlay"></div>
     <div class="slide-content">
       <h2 class="cta-title">Ready to multiply<br>your results?</h2>
       <p class="cta-sub">Let's talk about where you are today and where automation can take you.</p>
@@ -242,6 +360,7 @@
   <div class="nav-dot active" data-slide="0"></div>
   <div class="nav-dot" data-slide="1"></div>
   <div class="nav-dot" data-slide="2"></div>
+  <div class="nav-dot" data-slide="3"></div>
 </div>
 <div class="wbtm-brand">WBTM</div>
 
@@ -253,11 +372,13 @@ const dots   = document.querySelectorAll('.nav-dot');
 function goTo(n) {
   slides[current].classList.remove('active');
   dots[current].classList.remove('active');
-  // re-trigger animation
+  // Re-trigger fadeUp animation on content slides
   const content = slides[n].querySelector('.slide-content');
-  content.style.animation = 'none';
-  content.offsetHeight;
-  content.style.animation = '';
+  if (content) {
+    content.style.animation = 'none';
+    content.offsetHeight;
+    content.style.animation = '';
+  }
   current = n;
   slides[current].classList.add('active');
   dots[current].classList.add('active');
