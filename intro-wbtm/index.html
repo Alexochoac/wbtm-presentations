@@ -260,26 +260,42 @@
 
   /* ── Mobile Responsive ── */
   @media (max-width: 768px) {
+    /* 100dvh fixes iOS Safari where 100vh hides content behind the address bar */
+    body { height: 100dvh; }
+    .slides-container { height: 100dvh; }
     .slide {
-      padding: clamp(24px, 5vh, 48px) clamp(16px, 5vw, 32px);
+      height: 100dvh;
+      padding: 24px 18px 88px; /* 88px bottom clears nav dots */
+      overflow-y: auto;   /* slides scroll if content is taller than screen */
+      overflow-x: hidden;
     }
-    .cards-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
+    /* Wolf slide */
+    .wolf-bg {
+      background-size: cover;       /* fills portrait frame properly */
+      background-position: center 25%;
     }
-    .hero-stat-row {
-      gap: 20px;
-    }
-    .hero-stat-num { font-size: 26px; }
-    .section-sub { margin-bottom: 28px; }
-    .wolf-content {
-      bottom: 52px;
-      padding: 0 20px;
-    }
-    .wolf-title { font-size: clamp(22px, 6vw, 40px); }
+    .wolf-content { bottom: 88px; padding: 0 18px; }
+    .wolf-title { font-size: clamp(22px, 6vw, 36px); }
+    /* Hero slide */
+    .hero-title { font-size: clamp(28px, 8vw, 48px); }
+    .hero-sub { font-size: 14px; margin-bottom: 24px; }
+    .hero-stat-row { gap: 16px; }
+    .hero-stat-num { font-size: 24px; }
+    .hero-stat-label { font-size: 11px; }
+    /* Services slide */
+    .section-title { font-size: clamp(22px, 5vw, 36px); }
+    .section-sub { font-size: 14px; margin-bottom: 20px; }
+    .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+    .service-card { padding: 18px 16px; }
+    /* CTA slide */
+    .cta-title { font-size: clamp(26px, 7vw, 48px); }
+    .cta-sub { font-size: 15px; margin-bottom: 28px; }
+    /* Nav */
     .nav-arrow.prev { left: 8px; }
     .nav-arrow.next { right: 8px; }
     .wbtm-brand { display: none; }
+    /* Glow orbs are 350-500px — too large for a phone, hide them */
+    .glow-orb { display: none; }
   }
 </style>
 </head>
