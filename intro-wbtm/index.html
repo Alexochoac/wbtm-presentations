@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We Buildt To Multiply</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Umami Analytics -->
+<script defer src="https://umami.wbtm.io/script.js"
+  data-website-id="2056a7e6-dbd6-4246-a205-4f89ffe8a37f"
+  data-domains="alexochoac.github.io"
+  data-api="https://umami.wbtm.io/api/collect"></script>
+
+<style>
+  /* ── Theme Variables ── */
+  :root {
+    --accent:     #F5A623;
+    --accent-2:   #E8901A;
+    --accent-dim: rgba(245,166,35,.12);
+    --bg:         #ffffff;
+    --bg-card:    rgba(0,0,0,.04);
+    --text:       #0a0a0a;
+    --text-muted: rgba(0,0,0,.45);
+    --border:     rgba(0,0,0,.08);
+    --radius:     16px;
+    --font:       'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Slides ── */
+  .slides-container { width: 100vw; height: 100vh; position: relative; }
+  .slide {
+    display: none; width: 100%; height: 100vh;
+    align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    padding: clamp(40px, 8vh, 80px) clamp(24px, 8vw, 120px);
+    position: absolute; top: 0; left: 0;
+  }
+  .slide.active { display: flex; }
+  .slide-content {
+    max-width: 900px; width: 100%;
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Hero Slide ── */
+  .badge {
+    display: inline-block; font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent-2);
+    border: 1px solid rgba(245,166,35,.4); border-radius: 999px;
+    padding: 6px 16px; margin-bottom: 32px;
+  }
+  .hero-title {
+    font-size: clamp(40px, 7vw, 80px); font-weight: 800;
+    line-height: 1.05; margin-bottom: 24px;
+    color: #0a0a0a;
+    -webkit-text-fill-color: #0a0a0a;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, #F5A623 0%, #E8901A 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 22px); color: var(--text-muted);
+    font-weight: 400; max-width: 580px; margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+  .hero-stat-row {
+    display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-size: 32px; font-weight: 700;
+    background: linear-gradient(135deg, #F5A623, #E8901A);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ── Services Slide ── */
+  .section-label {
+    font-size: 12px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--accent-2); margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 48px); font-weight: 700;
+    margin-bottom: 12px; line-height: 1.15;
+  }
+  .section-sub {
+    font-size: 16px; color: var(--text-muted); margin-bottom: 48px;
+  }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    text-align: left;
+  }
+  .service-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    transition: border-color .3s;
+    cursor: default;
+  }
+  .service-card:hover { border-color: rgba(124,58,237,.4); }
+  .service-icon { font-size: 32px; margin-bottom: 16px; }
+  .service-name { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── CTA Slide ── */
+  .cta-title {
+    font-size: clamp(36px, 6vw, 68px); font-weight: 800;
+    line-height: 1.08; margin-bottom: 20px;
+  }
+  .cta-sub {
+    font-size: 18px; color: var(--text-muted); margin-bottom: 48px; line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-block; background: #F5A623;
+    color: #fff; font-size: 16px; font-weight: 600; padding: 16px 40px;
+    border-radius: 999px; text-decoration: none; border: none; cursor: pointer;
+    font-family: var(--font); transition: opacity .2s; letter-spacing: .02em;
+  }
+  .cta-btn:hover { opacity: .85; }
+  .cta-tagline { margin-top: 24px; font-size: 13px; color: var(--text-muted); }
+
+  /* ── Navigation ── */
+  .nav-arrow {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    font-size: 18px; width: 44px; height: 44px; border-radius: 50%;
+    cursor: pointer; transition: border-color .2s; z-index: 100;
+  }
+  .nav-arrow:hover { border-color: var(--accent); }
+  .nav-arrow.prev { left: 20px; }
+  .nav-arrow.next { right: 20px; }
+  .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+  .nav-dots { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+  .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .2s; }
+  .nav-dot.active { background: var(--accent); }
+
+  /* ── Branding watermark ── */
+  .wbtm-brand {
+    position: fixed; bottom: 22px; right: 28px;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="slides-container">
+
+  <!-- Slide 1: Hero -->
+  <div class="slide active" id="slide-0">
+    <div class="slide-content">
+      <div class="badge">We Buildt To Multiply · WBTM</div>
+      <h1 class="hero-title">We don't just build tools.<br><span>We multiply results.</span></h1>
+      <p class="hero-sub">We help businesses grow faster by combining automation, AI agents, and smart CRM strategies — so your team spends time on what actually matters.</p>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <div class="hero-stat-num">10×</div>
+          <div class="hero-stat-label">Faster workflows</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Core services</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Custom built</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2: Services -->
+  <div class="slide" id="slide-1">
+    <div class="slide-content">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Three ways we multiply your business</h2>
+      <p class="section-sub">Each service is built around one goal: less manual work, more results.</p>
+      <div class="cards-grid">
+        <div class="service-card"
+          data-umami-event="service-card-viewed"
+          data-umami-event-service="automation">
+          <div class="service-icon">⚡</div>
+          <div class="service-name">Workflow Automation</div>
+          <div class="service-desc">We map and automate your repetitive processes using n8n — from lead routing to reporting — so nothing falls through the cracks.</div>
+        </div>
+        <div class="service-card"
+          data-umami-event="service-card-viewed"
+          data-umami-event-service="ai-agents">
+          <div class="service-icon">🤖</div>
+          <div class="service-name">AI Agents</div>
+          <div class="service-desc">Custom AI agents that work inside your tools — answering questions, qualifying leads, summarizing data, and taking action automatically.</div>
+        </div>
+        <div class="service-card"
+          data-umami-event="service-card-viewed"
+          data-umami-event-service="hubspot-crm">
+          <div class="service-icon">🎯</div>
+          <div class="service-name">HubSpot CRM</div>
+          <div class="service-desc">Setup, cleanup, and strategy for HubSpot — sequences, pipelines, dashboards — so your sales team always knows what to do next.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: CTA -->
+  <div class="slide" id="slide-2">
+    <div class="slide-content">
+      <h2 class="cta-title">Ready to multiply<br>your results?</h2>
+      <p class="cta-sub">Let's talk about where you are today and where automation can take you.</p>
+      <button class="cta-btn"
+        data-umami-event="cta-clicked"
+        data-umami-event-action="lets-talk">
+        Let's Talk →
+      </button>
+      <p class="cta-tagline">wbtm.io · We Buildt To Multiply</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<button class="nav-arrow prev hidden" id="btnPrev">&#8592;</button>
+<button class="nav-arrow next" id="btnNext">&#8594;</button>
+<div class="nav-dots">
+  <div class="nav-dot active" data-slide="0"></div>
+  <div class="nav-dot" data-slide="1"></div>
+  <div class="nav-dot" data-slide="2"></div>
+</div>
+<div class="wbtm-brand">WBTM</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.nav-dot');
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  // re-trigger animation
+  const content = slides[n].querySelector('.slide-content');
+  content.style.animation = 'none';
+  content.offsetHeight;
+  content.style.animation = '';
+  current = n;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  document.getElementById('btnPrev').classList.toggle('hidden', current === 0);
+  document.getElementById('btnNext').classList.toggle('hidden', current === slides.length - 1);
+}
+
+document.getElementById('btnNext').onclick = () => { if (current < slides.length - 1) goTo(current + 1); };
+document.getElementById('btnPrev').onclick = () => { if (current > 0) goTo(current - 1); };
+dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.slide)));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' && current < slides.length - 1) goTo(current + 1);
+  if (e.key === 'ArrowLeft'  && current > 0) goTo(current - 1);
+});
+</script>
+</body>
+</html>
